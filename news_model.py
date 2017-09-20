@@ -7,11 +7,11 @@ class BaseModel(Model):
         database = psql_db
 
 class News(BaseModel):
-    title = CharField()
-    url = CharField()
+    title = TextField()
+    url = TextField()
     pub_date = DateTimeField()
-    pub_source = CharField()
-    fingerprint = CharField()
+    pub_source = TextField()
+    fingerprint = TextField()
     buy_vote_count = IntegerField(default=0)
     sell_vote_count = IntegerField(default=0)
     hold_vote_count = IntegerField(default=0)

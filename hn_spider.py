@@ -60,6 +60,9 @@ class HNSpider(Spider):
                             # Only for Hackernews
                             # Pass
 
+                            if (new_news.url.find('item?id=') == 0):
+                                new_news.url = 'https://news.ycombinator.com/' + new_news.url
+
                             try:
                                 saved_news = News.select().where(News.url == new_news.url).get()
                             except News.DoesNotExist:
