@@ -42,9 +42,16 @@ class TwitterSpider(Spider):
             print(tweet_news.title + "    " + tweet_news.url + "   " + tweet_news.fingerprint)
 
     def roam(self):
+        new_news = News(
+                                title = '',
+                                url = '',
+                                pub_date = '', 
+                                pub_source = '',
+                                fingerprint = ''
+                            )
         try:
             for user in self.following_list:
-                tweets = tweepy.Cursor(self.api.user_timeline, id=user).items(100)
+                tweets = tweepy.Cursor(self.api.user_timeline, id=user).items(20)
                 for tweet in tweets:
                     tweet_url = 'https://twitter.com/' + user + '/status/' + tweet.id_str
                     new_news = News(
@@ -66,7 +73,7 @@ class TwitterSpider(Spider):
                         else:
                             pass
         except Exception as e:
-            print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            print(new_news.url + "   " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             logging.exception(e)
 # ts = TwitterSpider()
 # ts.roam()

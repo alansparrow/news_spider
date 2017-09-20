@@ -11,6 +11,8 @@ bb_spider = BloombergSpider()
 mit_spider = MITTechReviewSpider()
 twitter_spider = TwitterSpider()
 
+print("Hello! I am Spider. I will start collecting news...")
+
 while True:
     
     try:

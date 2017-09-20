@@ -21,6 +21,13 @@ class HNSpider(Spider):
         return '\n'.join(self.url_list)
 
     def roam(self):
+        new_news = News(
+                                title = '',
+                                url = '',
+                                pub_date = '', 
+                                pub_source = '',
+                                fingerprint = ''
+                            )
         try:
             for url in self.url_list:
                 # query the website and return the html to the variable ‘page’
@@ -43,7 +50,7 @@ class HNSpider(Spider):
 
                         if (saved_news == None):
                             new_news = News(
-                                title = news_original_text,
+                                title = news_original_text[:255],
                                 url = EachPart.get('href'),
                                 pub_date = datetime.now(), 
                                 pub_source = url,
@@ -63,5 +70,5 @@ class HNSpider(Spider):
                                 self.send_notification(new_news)
                                 print(new_news.title + "    " + new_news.url + "   " + fingerprint)
         except Exception as e:
-            print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            print(new_news.url + "   " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             logging.exception(e)
