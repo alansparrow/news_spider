@@ -12,7 +12,6 @@ class News(BaseModel):
     pub_date = DateTimeField()
     pub_source = CharField()
     fingerprint = CharField()
-    is_neutral = BooleanField(default=True)
     buy_vote_count = IntegerField(default=0)
     sell_vote_count = IntegerField(default=0)
     hold_vote_count = IntegerField(default=0)
