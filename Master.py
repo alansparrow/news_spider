@@ -1,15 +1,15 @@
 import time
 from datetime import datetime
-from HNSpider import HNSpider
-from BloombergSpider import BloombergSpider
-from MITTechReviewSpider import MITTechReviewSpider
-from TwitterSpider import TwitterSpider
+from hn_spider import HNSpider
+from bloomberg_spider import BloombergSpider
+from mit_techreview_spider import MITTechReviewSpider
+from twitter_spider import TwitterSpider
 import logging
 
 hn_spider = HNSpider()
 bb_spider = BloombergSpider()
 mit_spider = MITTechReviewSpider()
-twitter_spier = TwitterSpider()
+twitter_spider = TwitterSpider()
 
 while True:
     
@@ -18,7 +18,7 @@ while True:
             hn_spider.roam()
             bb_spider.roam()
             mit_spider.roam()
-            twitter_spier.roam()
+            twitter_spider.roam()
             time.sleep(60)
             print("Reload... " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 

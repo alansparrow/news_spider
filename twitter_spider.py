@@ -1,4 +1,4 @@
-from Spider import Spider
+from spider import Spider
 from peewee import *
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -22,7 +22,8 @@ class TwitterSpider(Spider):
                             'aantonop',
                             'petertoddbtc',
                             'VitalikButerin',
-                            'SatoshiLite'
+                            'SatoshiLite',
+                            'ethereumproject'
                         ]
 
     def __str__(self):

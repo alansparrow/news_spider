@@ -1,4 +1,4 @@
-from Spider import Spider
+from spider import Spider
 from peewee import *
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -59,17 +59,18 @@ class BloombergSpider(Spider):
                             s = BeautifulSoup(p, 'html.parser')
                             t = s.find_all('time', {'class': 'article-timestamp'})
                             
-                            try:
+                            
+                            if (len(t) != 0):
+                                t = t[0].attrs['datetime']
+                                utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
+                            else: # video
+                                t = s.find_all('time', {'class': 'published-at'})
                                 if (len(t) != 0):
                                     t = t[0].attrs['datetime']
-                                else: # video
-                                    t = s.find_all('time', {'class': 'published-at'})
-                                    t = t[0].attrs['datetime']
-                            except IndexError:
-                                logging.exception("message")
-                                continue
-                            
-                            utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
+                                    utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
+                                else:
+                                    utc_dt = datetime.now()
+                                                            
                             new_news.pub_date = utc_dt
                             
                             try:
@@ -82,5 +83,5 @@ class BloombergSpider(Spider):
                                 self.send_notification(new_news)
                                 print(new_news.title + "    " + new_news.url + "   " + fingerprint)
         except Exception as e:
-            print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            print(new_news.url + '   ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             logging.exception(e)

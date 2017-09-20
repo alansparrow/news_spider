@@ -7,7 +7,8 @@ import hashlib
 import time
 from news_model import *
 from datetime import datetime
-from FCM import FCM
+from fcm import FCM
+import re
 
 class Spider:
     sensitive_simple_words = ['ico', 'icos', 'bitcoin', 'ethereum', 'litecoin',
@@ -30,7 +31,8 @@ class Spider:
         title = title.strip().lower()
         for s_word in Spider.sensitive_simple_words:
             for t_word in title.split():
-                if (s_word == t_word):
+                t_word_clean = re.sub('[^A-Za-z0-9]+', '', t_word)
+                if (s_word == t_word_clean):
                     return True
 
         for s_word in Spider.sensitive_complex_words:
