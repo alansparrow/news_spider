@@ -19,11 +19,11 @@ class TwitterSpider(Spider):
 
     def __init__(self):
         self.following_list = [
-                            'aantonop',
-                            'petertoddbtc',
-                            'VitalikButerin',
-                            'SatoshiLite',
-                            'ethereumproject'
+                            # 'aantonop',
+                            # 'petertoddbtc',
+                            'VitalikButerin'
+                            # 'SatoshiLite',
+                            # 'ethereumproject'
                         ]
 
     def __str__(self):
@@ -52,6 +52,7 @@ class TwitterSpider(Spider):
         try:
             for user in self.following_list:
                 tweets = tweepy.Cursor(self.api.user_timeline, id=user).items(20)
+                
                 for tweet in tweets:
                     tweet_url = 'https://twitter.com/' + user + '/status/' + tweet.id_str
                     new_news = News(
@@ -62,7 +63,7 @@ class TwitterSpider(Spider):
                                 pub_source = 'https://twitter.com/' + user,
                                 fingerprint = hashlib.sha256(tweet_url.encode()).hexdigest()
                             )
-
+                    # print(new_news.title)
                     if (hasattr(tweet, 'retweeted_status') and 
                             self.check_related_content(tweet.text)):   # retweet
                         self.check_and_update_database(new_news)
