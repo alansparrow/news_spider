@@ -19,11 +19,11 @@ class TwitterSpider(Spider):
 
     def __init__(self):
         self.following_list = [
-                            # 'aantonop',
-                            # 'petertoddbtc',
+                            'aantonop',
+                            'petertoddbtc',
                             'VitalikButerin'
-                            # 'SatoshiLite',
-                            # 'ethereumproject'
+                            'SatoshiLite',
+                            'ethereumproject'
                         ]
 
     def __str__(self):
