@@ -20,7 +20,7 @@ class TwitterSpider(Spider):
     def __init__(self):
         self.following_list = [
                             'aantonop',
-                            'petertoddbtc',
+                            # 'petertoddbtc',
                             'VitalikButerin'
                             'SatoshiLite',
                             'ethereumproject'
