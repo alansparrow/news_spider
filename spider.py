@@ -16,7 +16,8 @@ class Spider:
                        'token', 'tokens', 'blockchain', 'blockchains', 'fud',
                        '$btc', '$eth', '$ltc', 'btc', 'eth', 'ltc']
 
-    sensitive_complex_words = ['crypto currency', 'crypto currencies']
+    sensitive_complex_words = ['crypto currency', 'crypto currencies',
+                               'smart contract', 'smart contracts']
 
     psql_db = PostgresqlDatabase('news_spider', user='baotrungtn')
 
