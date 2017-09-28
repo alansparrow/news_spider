@@ -15,7 +15,7 @@ while True:
             HNSpider().roam()
             BloombergSpider().roam()
             MITTechReviewSpider().roam()
-            TwitterSpider().roam()
+            # TwitterSpider().roam()
             time.sleep(60)
             print("Reload... " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
