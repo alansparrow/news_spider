@@ -15,6 +15,8 @@ class News(BaseModel):
     buy_vote_count = IntegerField(default=0)
     sell_vote_count = IntegerField(default=0)
     hold_vote_count = IntegerField(default=0)
+    fact_vote_count = IntegerField(default=0)
+    opinion_vote_count = IntegerField(default=0)
 
     def __str__(self):
         return self.title
