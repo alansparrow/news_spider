@@ -59,7 +59,6 @@ class MITTechReviewSpider(Spider):
                         try:
                             saved_news = News.select().where(News.fingerprint == fingerprint).get()
                         except Exception as e:
-                            print(e.pgerror)
                             saved_news = None
 
                         if (saved_news == None):
