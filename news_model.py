@@ -1,5 +1,5 @@
 from peewee import *
-psql_db = PostgresqlDatabase('news_spider', user='baotrungtn')
+psql_db = PostgresqlDatabase('news_spider', user='baotrungtn', password='baotrung', host='192.241.147.78', port='5432')
 
 class BaseModel(Model):
     """A base model that will use our Postgresql database"""

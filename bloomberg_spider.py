@@ -68,8 +68,8 @@ class BloombergSpider(Spider):
                             
                             
                             if (len(t) != 0):
-                                t = t[0].attrs['datetime']
-                                utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
+                                t = t[0].attrs['datetime'][:19]
+                                utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S")
                             else: # video
                                 t = s.find_all('time', {'class': 'published-at'})
                                 if (len(t) != 0):
