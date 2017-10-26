@@ -52,7 +52,7 @@ class HNSpider(Spider):
                             new_news = News(
                                 title = news_original_text[:255],
                                 url = EachPart.get('href'),
-                                pub_date = datetime.now(), 
+                                pub_date = datetime.utcnow(), 
                                 pub_source = url,
                                 fingerprint = fingerprint
                             )
@@ -71,7 +71,7 @@ class HNSpider(Spider):
                             if (saved_news == None):
                                 new_news.save()
                                 self.send_notification(new_news)
-                                print(new_news.title + "    " + new_news.url + "   " + fingerprint)
+                                print(new_news.title + "    " + new_news.url + "   " + new_news.fingerprint)
         except Exception as e:
-            print(new_news.url + "   " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            print(new_news.url + "   " + datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
             logging.exception(e)

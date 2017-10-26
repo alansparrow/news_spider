@@ -54,7 +54,7 @@ class BloombergSpider(Spider):
                             new_news = News(
                                 title = news_original_text,
                                 url = EachPart.get('href'),
-                                pub_date = datetime.now(), 
+                                pub_date = datetime.utcnow(), 
                                 pub_source = url,
                                 fingerprint = fingerprint
                             )
@@ -67,18 +67,18 @@ class BloombergSpider(Spider):
                             t = s.find_all('time', {'class': 'article-timestamp'})
                             
                             
-                            if (len(t) != 0):
-                                t = t[0].attrs['datetime'][:19]
-                                utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S")
-                            else: # video
-                                t = s.find_all('time', {'class': 'published-at'})
-                                if (len(t) != 0):
-                                    t = t[0].attrs['datetime']
-                                    utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S.%fZ")
-                                else:
-                                    utc_dt = datetime.now()
+                            # if (len(t) != 0):
+                            #     t = t[0].attrs['datetime'][:19]
+                            #     utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S")
+                            # else: # video
+                            #     t = s.find_all('time', {'class': 'published-at'})
+                            #     if (len(t) != 0):
+                            #         t = t[0].attrs['datetime'][:19]
+                            #         utc_dt = datetime.strptime(t, "%Y-%m-%dT%H:%M:%S")
+                            #     else:
+                            #         utc_dt = datetime.utcnow()
                                                             
-                            new_news.pub_date = utc_dt
+                            # new_news.pub_date = utc_dt
                             
                             try:
                                 saved_news = News.select().where(News.url == new_news.url).get()
@@ -88,7 +88,7 @@ class BloombergSpider(Spider):
                             if (saved_news == None):
                                 new_news.save()
                                 self.send_notification(new_news)
-                                print(new_news.title + "    " + new_news.url + "   " + fingerprint)
+                                print(new_news.title + "    " + new_news.url + "   " + new_news.fingerprint)
         except Exception as e:
-            print(new_news.url + "   " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            print(new_news.url + "   " + datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
             logging.exception(e)

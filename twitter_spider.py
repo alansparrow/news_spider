@@ -74,7 +74,7 @@ class TwitterSpider(Spider):
                         else:
                             pass
         except Exception as e:
-            print(new_news.url + "   " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            print(new_news.url + "   " + datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"))
             logging.exception(e)
 # ts = TwitterSpider()
 # ts.roam()
